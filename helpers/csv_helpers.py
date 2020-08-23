@@ -36,6 +36,7 @@ def get_fields_for_csv(include_polygon=False):
         'ALAND',
         'INTPTLAT',
         'INTPTLON',
+        'TRACTCE',
     ]
     if include_polygon:
         field_list.append('GEOMETRY')
@@ -77,6 +78,7 @@ def make_basic_row(feature, item, geo_type, item_options):
         'ALAND': feature.GetField("ALAND"),
         'INTPTLAT': feature.GetField("INTPTLAT"),
         'INTPTLON': feature.GetField("INTPTLON"),
+        'TRACTCE' : None,
     })
     if item_options['include_polygon']:
         _geom = feature.GetGeometryRef()
@@ -270,3 +272,21 @@ def make_zcta5_row(feature, item, geo_type, item_options):
         })
     return item
 
+
+def make_tract_row(feature, item, item_options):
+    # Tracts
+    _sumlev = '140'
+    _namelsad = feature.GetField("NAMELSAD")
+    _name = feature.GetField("NAME")
+    item.update({
+        'FULL_GEOID': _build_full_geoid(_sumlev, item_options),
+        'SUMLEV': _sumlev,
+        'NAMELSAD': _namelsad,
+	'TRACTCE' : feature.GetField("TRACTCE")
+    })
+    if item_options['include_polygon']:
+        _geom = feature.GetGeometryRef()
+        item.update({
+            'GEOMETRY': str(_geom),
+        })
+    return item
