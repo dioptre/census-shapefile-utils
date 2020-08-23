@@ -282,7 +282,12 @@ def make_tract_row(feature, item, item_options):
         'FULL_GEOID': _build_full_geoid(_sumlev, item_options),
         'SUMLEV': _sumlev,
         'NAMELSAD': _namelsad,
-	'TRACTCE' : feature.GetField("TRACTCE")
+	'TRACTCE' : feature.GetField("TRACTCE"),
+	'STATEFP' : feature.GetField("STATEFP"),
+	'COUNTYFP' : feature.GetField("COUNTYFP"),
+	'ALAND' : feature.GetField("ALAND"),
+	'INTPTLAT' : feature.GetField("INTPTLAT"),
+	'INTPTLON' : feature.GetField("INTPTLON"),
     })
     if item_options['include_polygon']:
         _geom = feature.GetGeometryRef()
