@@ -13,6 +13,7 @@ GEO_TYPES_DICT = {
     'state': 'States',
     'unsd': 'Unified School Districts',
     'zcta5': '5-Digit Zip Code Tabulation Area',
+    'tract': 'Census Tracts'
 }
 
 GEO_TYPES_LIST = sorted([
